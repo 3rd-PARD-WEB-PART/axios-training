@@ -1,5 +1,5 @@
-export const getUserData = async () => {};
+export const getUserData = () => {};
 
-export const updateUserData = async () => {};
+export const updateUserData = () => {};
 
-export const deleteUser = async () => {};
+export const deleteUser = () => {};
