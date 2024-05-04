@@ -8,7 +8,16 @@ const App = () => {
 
   // 전체 데이터 불러오기
   useEffect(() => {
-    // your code here
+    const fetchData = async () => {
+      try {
+        const response = await getUserData();
+        setUserData(response.data);
+        console.log("실행");
+      } catch (error) {
+        handleApiError(error, "Error fetching data:");
+      }
+    };
+    fetchData();
   }, []);
 
   // 추가하려는 유저 정보를 저장하는 변수
@@ -16,7 +25,14 @@ const App = () => {
 
   // 데이터를 추가하는 핸들러
   const handlePostData = async () => {
-    // your code here
+    try {
+      const response = await updateUserData(newUserData);
+      const updatedResponse = await getUserData();
+      setUserData(updatedResponse.data);
+      setNewUserData(initialState);
+    } catch (error) {
+      handleApiError(error, "Error updating data:");
+    }
   };
 
   const handleInputChange = (e) => {
@@ -28,7 +44,13 @@ const App = () => {
   };
 
   const handleDeleteData = async (id) => {
-    // your code here
+    try {
+      const response = await deleteUser(id);
+      const updatedResponse = await getUserData();
+      setUserData(updatedResponse.data);
+    } catch (error) {
+      handleApiError(error, "Error deleting data:");
+    }
   };
 
   const handleApiError = (error, errorMessage) => {
